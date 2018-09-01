@@ -1,0 +1,129 @@
+---
+title: "Package ‘fars’"
+author: "Lucy Li"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Package ‘fars’}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+**Title** Analyze American Highway Fetal Accidents
+
+**Description** This package cleans, subsets and analyzes datasets from US National Highway Traffic Safety Administration's [Fatality Analysis Reporting System](https://www.nhtsa.gov/Data/Fatality-Analysis-Reporting-System-(FARS)), which is a nationwide census providing the American public yearly data regarding fatal injuries suffered in motor vehicle traffic crashes.
+
+**Imports** dplyr graphics maps readr tidyr
+
+**VignetteBuilder** knitr
+
+**Encoding** UTF-8
+
+## fars_read: Read dataset
+
+**Description**
+
+This is a function that loads the csv dataset if it exists, and prints the data frame form of the dataset. You can specify the name of the dataset (using the filename argument).
+
+**Usage**
+
+fars_read(accident_2015.csv)
+
+**Arguments**
+
+filename
+
+  A character string giving the name of the csv dataset.
+
+**Value**
+
+Data frame form of a csv dataset. If the filename doesn't exist then prints an error message.
+
+## make_filename: Make file name
+
+**Description**
+
+This is a function that makes the dataset names. You can insert the year of the dataset into the file name (using the year argument).
+
+**Usage**
+
+make_filename(2018)
+
+**Arguments**
+
+year
+
+   A numeric variable giving the year of the file name.
+
+**Value**
+
+Different dataset name by different year.
+
+## fars_read_years: Select months and years of interest
+
+**Description**
+
+This is a function that selects the months and years in specified years from datasets of these years (using the years argument).
+
+**Usage**
+
+fars_read_years(list(2017,2018))
+
+**Arguments**
+
+years
+
+   A list of numbers giving the years of interest.
+
+**Value**
+
+Months and years of interst. If datasets of one or more years do not exist in the datasset then generates a warning message.
+
+## fars_summarize_years: Summarize datasets of interest
+
+**Description**
+
+This is a function that counts the number of months in each years of interest (using the years argument).
+
+**Usage**
+
+fars_read_years(list(2017,2018))
+
+**Arguments**
+
+years
+
+   A list of numbers giving the years of interest.
+
+**Value**
+
+Months and years of interst. If datasets of one or more years do not exist in the datasset then generates a warning message.
+
+## fars_map_state: Draw state map of the accidents in a year
+
+**Description**
+
+This is a function that draws the locations of the accidents in the specified state in the specified year.
+
+**Usage**
+
+fars_map_state(1, 2018)
+
+**Arguments**
+
+state.num
+   A numeric variable specifies the state of interest by number.
+
+year
+   A numeric variable specifies the year of interest.
+
+**Value**
+
+State map of the accidents in a year. If the state doesn't exist then prints an error message. If there were no accidents in the state and year specified, then prints "no accidents to plot".
