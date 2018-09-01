@@ -6,12 +6,10 @@
 #'
 #' @param filename A character string giving the name of the
 #'                 csv dataset.
-#' 
+#'
 #' @return This function prints the data frame form of a csv dataset.
 #'         If the filename doesn't exist then prints an error message.
 #'
-#' @importFrom readr dplyr 
-#' 
 #' @examples
 #' fars_read(accident_2015.csv)
 #'
@@ -24,6 +22,7 @@ fars_read <- function(filename) {
   })
   dplyr::tbl_df(data)
 }
+#'
 
 #' Make filename
 #'
@@ -32,10 +31,10 @@ fars_read <- function(filename) {
 #' (using the \code{year} argument).
 #'
 #' @param year A numeric variable giving the year of the file name.
-#' 
+#'
 #' @return This function prints different dataset name by
 #'         different year.
-#' 
+#'
 #' @examples
 #' make_filename(2018)
 #'
@@ -51,23 +50,21 @@ make_filename <- function(year) {
 #' from datasets of these years (using the \code{years} argument).
 #'
 #' @param years A list of numbers giving the years of interest.
-#' 
+#'
 #' @return This function prints months and years of interst. If datasets
 #'         of one or more years do not exist in the datasset then generates
 #'         a warning message.
-#' 
-#' @importFrom dplyr
-#' 
+#'
 #' @examples
 #' fars_read_years(list(2017,2018))
-#' 
+#'
 #' @export
 fars_read_years <- function(years) {
   lapply(years, function(year) {
     file <- make_filename(year)
     tryCatch({
       dat <- fars_read(file)
-      dplyr::mutate(dat, year = year) %>% 
+      dplyr::mutate(dat, year = year) %>%
         dplyr::select(MONTH, year)
     }, error = function(e) {
       warning("invalid year: ", year)
@@ -75,6 +72,7 @@ fars_read_years <- function(years) {
     })
   })
 }
+#'
 
 #' Summarize datasets of interest
 #'
@@ -82,20 +80,18 @@ fars_read_years <- function(years) {
 #' of interest (using the \code{years} argument).
 #'
 #' @param years A list of numbers giving the years of interest.
-#' 
+#'
 #' @return This function prints the number of months in each years
 #'         of interest.
-#' 
-#' @importFrom dplyr tidyr
-#' 
+#'
 #' @examples
 #' fars_summarize_years(list(2017,2018))
 #'
 #' @export
 fars_summarize_years <- function(years) {
   dat_list <- fars_read_years(years)
-  dplyr::bind_rows(dat_list) %>% 
-    dplyr::group_by(year, MONTH) %>% 
+  dplyr::bind_rows(dat_list) %>%
+    dplyr::group_by(year, MONTH) %>%
     dplyr::summarize(n = n()) %>%
     tidyr::spread(year, n)
 }
@@ -108,14 +104,12 @@ fars_summarize_years <- function(years) {
 #' @param state.num A numeric variable specifies the state of
 #'                  interest by number.
 #' @param year a numeric variable specifies the year of interest.
-#' 
+#'
 #' @return This function prints state map of the accidents in a year.
 #'         If the state doesn't exist then prints an error message.
 #'         If there were no accidents in the state and year specified,
 #'         then prints "no accidents to plot".
-#' 
-#' @importFrom dplyr maps graphics
-#' 
+#'
 #' @examples
 #' fars_map_state(1, 2018)
 #'
@@ -124,7 +118,7 @@ fars_map_state <- function(state.num, year) {
   filename <- make_filename(year)
   data <- fars_read(filename)
   state.num <- as.integer(state.num)
-  
+
   if(!(state.num %in% unique(data$STATE)))
     stop("invalid STATE number: ", state.num)
   data.sub <- dplyr::filter(data, STATE == state.num)
