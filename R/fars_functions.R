@@ -10,9 +10,6 @@
 #' @return This function prints the data frame form of a csv dataset.
 #'         If the filename doesn't exist then prints an error message.
 #'
-#' @examples
-#' fars_read(accident_2015.csv)
-#'
 #' @export
 fars_read <- function(filename) {
   if(!file.exists(filename))
@@ -35,9 +32,6 @@ fars_read <- function(filename) {
 #' @return This function prints different dataset name by
 #'         different year.
 #'
-#' @examples
-#' make_filename(2018)
-#'
 #' @export
 make_filename <- function(year) {
   year <- as.integer(year)
@@ -54,9 +48,6 @@ make_filename <- function(year) {
 #' @return This function prints months and years of interst. If datasets
 #'         of one or more years do not exist in the datasset then generates
 #'         a warning message.
-#'
-#' @examples
-#' fars_read_years(list(2017,2018))
 #'
 #' @export
 fars_read_years <- function(years) {
@@ -84,9 +75,6 @@ fars_read_years <- function(years) {
 #' @return This function prints the number of months in each years
 #'         of interest.
 #'
-#' @examples
-#' fars_summarize_years(list(2017,2018))
-#'
 #' @export
 fars_summarize_years <- function(years) {
   dat_list <- fars_read_years(years)
@@ -109,9 +97,6 @@ fars_summarize_years <- function(years) {
 #'         If the state doesn't exist then prints an error message.
 #'         If there were no accidents in the state and year specified,
 #'         then prints "no accidents to plot".
-#'
-#' @examples
-#' fars_map_state(1, 2018)
 #'
 #' @export
 fars_map_state <- function(state.num, year) {
