@@ -17,7 +17,3 @@ This function prints the number of months in each years
 This is a function that counts the number of months in each years
 of interest (using the \code{years} argument).
 }
-\examples{
-fars_summarize_years(list(2017,2018))
-
-}

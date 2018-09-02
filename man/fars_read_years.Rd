@@ -18,7 +18,3 @@ This function prints months and years of interst. If datasets
 This is a function that selects the months and years in specified years
 from datasets of these years (using the \code{years} argument).
 }
-\examples{
-fars_read_years(list(2017,2018))
-
-}

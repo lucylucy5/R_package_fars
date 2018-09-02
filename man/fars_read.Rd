@@ -19,7 +19,3 @@ This is a function that loads the csv dataset if it exists, and
 prints the data frame form of the dataset. You can specify the
 name of the dataset (using the \code{filename} argument).
 }
-\examples{
-fars_read(accident_2015.csv)
-
-}

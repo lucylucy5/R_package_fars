@@ -22,7 +22,3 @@ This function prints state map of the accidents in a year.
 This is a function that draws the locations of the accidents in
 the specified state in the specified year.
 }
-\examples{
-fars_map_state(1, 2018)
-
-}

@@ -18,7 +18,3 @@ This is a function that makes the dataset names. You can insert
 the year of the dataset into the file name
 (using the \code{year} argument).
 }
-\examples{
-make_filename(2018)
-
-}
